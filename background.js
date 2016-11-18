@@ -1,19 +1,42 @@
-function navigate(url) {
-  chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-    chrome.tabs.update(tabs[0].id, {url: url});
+/**
+ * De-clutters the downloads folder by checking for the file
+ * being downloaded. This is done by checking the MIME type of
+ * the file being downloaded. The function always overwrites
+ * any duplicate files.
+ */
+chrome.downloads.onDeterminingFilename.addListener(function(item, suggest) {
+  if (isPDF(item)) {
+    suggest({
+      filename: 'PDFs/' + item.filename,
+      conflictAction: 'overwrite'
+    });
+  } else if (isZIP(item)) {
+    suggest({
+      filename: 'ZIPs/' + item.filename,
+      conflictAction: 'overwrite'
+    });
+  }
+  suggest({
+    filename: item.filename,
+    conflictAction: 'overwrite'
   });
-}
-
-//Set default suggestion for the user
-function resetdefaultSuggestion() {
-	chrome.omnibox.setDefaultSuggestion({
-		description: "Search Facebook"
-	});
-}
-
-resetdefaultSuggestion();
-
-//returns the top hits to the entered text
-chrome.omnibox.onInputEntered.addListener(function(text) {
-	navigate("https://www.facebook.com/search/top/?q=" + text)
 });
+
+
+/**
+ * @param item
+ * @return boolean
+ */
+function isPDF(item) {
+  if (item.mime === "application/pdf" || item.filename.match(/\.pdf$/i)) return true;
+  return false;
+}
+
+/**
+ * @param item
+ * @return boolean
+ */
+function isZIP(item) {
+  if (item.filename.match(/\.(zip|rar)$/i)) return true;
+  return false;
+}
