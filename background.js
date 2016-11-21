@@ -1,8 +1,7 @@
 /**
- * De-clutters the downloads folder by checking for the file
- * being downloaded. This is done by checking the MIME type of
- * the file being downloaded. The function always overwrites
- * any duplicate files.
+ * De-clutters the downloads folder by checking the MIME type of
+ * the file being downloaded and sorts them into
+ * appropriate folders
  */
 chrome.downloads.onDeterminingFilename.addListener(function(item, suggest) {
   if (isPDF(item)) {
@@ -27,8 +26,10 @@ chrome.downloads.onDeterminingFilename.addListener(function(item, suggest) {
   });
 });
 
-
 /**
+ * Returns true if the file MIME type is application/pdf
+ * or if the file extension matches the regex expression
+ *
  * @param item
  * @return boolean
  */
@@ -38,6 +39,9 @@ function isPDF(item) {
 }
 
 /**
+ * Returns true if the file extension matches the
+ * regex expression
+ *
  * @param item
  * @return boolean
  */
@@ -47,6 +51,9 @@ function isZIP(item) {
 }
 
 /**
+ * Returns true if the file extension matches the
+ * regex expression
+ *
  * @param item
  * @return boolean
  */
