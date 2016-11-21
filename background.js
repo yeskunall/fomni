@@ -15,6 +15,11 @@ chrome.downloads.onDeterminingFilename.addListener(function(item, suggest) {
       filename: 'ZIPs/' + item.filename,
       conflictAction: 'overwrite'
     });
+  } else if (isDocument(item)) {
+    suggest({
+      filename: 'docs/' + item.filename,
+      conflictAction: 'overwrite'
+    });
   }
   suggest({
     filename: item.filename,
@@ -39,4 +44,12 @@ function isPDF(item) {
 function isZIP(item) {
   if (item.filename.match(/\.(zip|rar)$/i)) return true;
   return false;
+}
+
+/**
+ * @param item
+ * @return boolean
+ */
+function isDocument(item) {
+  if (item.filename.match(/\.(doc|docx)$/i)) return true;
 }
