@@ -18,12 +18,12 @@ chrome.downloads.onDeterminingFilename.addListener(function(item, suggest) {
   } else if (isDocument(item)) {
     suggest({
       filename: 'docs/' + item.filename,
-      conflictAction: 'overwrite'
+      conflictAction: 'prompt'
     });
   }
   suggest({
     filename: item.filename,
-    conflictAction: 'overwrite'
+    conflictAction: 'prompt'
   });
 });
 
