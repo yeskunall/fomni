@@ -9,6 +9,8 @@
         "persistent": false
     },
     "permissions": [
-        "downloads"
+        "downloads",
+        "tabs",
+        "activeTab"
     ]
 }
