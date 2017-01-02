@@ -4,7 +4,13 @@
  * appropriate folders
  */
 chrome.downloads.onDeterminingFilename.addListener(function(item, suggest) {
-  if (isPDF(item)) {
+
+  if(fromFb(item)) {
+    suggest({
+      filename: 'facebook/' + item.filename,
+      conflictAction: 'overwrite'
+    });
+  } else if (isPDF(item)) {
     suggest({
       filename: 'PDFs/' + item.filename,
       conflictAction: 'overwrite'
@@ -60,3 +66,14 @@ function isZIP(item) {
 function isDocument(item) {
   if (item.filename.match(/\.(doc|docx)$/i)) return true;
 }
+
+/**
+ * Returns true if content is being
+ * downloaded from Facebook
+ *
+ * @param item
+ * @return boolean
+ */
+ function fromFb(item) {
+   if (item.url.match(/facebook/)) return true;
+ }
