@@ -28,6 +28,11 @@ chrome.downloads.onDeterminingFilename.addListener(function(item, suggest) {
       filename: 'facebook/' + item.filename,
       conflictAction: 'overwrite'
     });
+  } else if (fromImgur(item)) {
+    suggest({
+      filename: 'Imgur/' + item.filename,
+      conflictAction: 'overwrite'
+    });
   } else if (isPDF(item)) {
     suggest({
       filename: 'PDFs/' + item.filename,
@@ -95,3 +100,14 @@ function isDocument(item) {
  function fromFb(item) {
    if (item.url.match(/facebook/)) return true;
  }
+
+ /**
+  * Returns true if content is being
+  * downloaded from Imgur
+  *
+  * @param item
+  * @return boolean
+  */
+  function fromImgur(item) {
+    if (item.url.match(/imgur/)) return true;
+  }
