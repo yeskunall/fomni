@@ -1,2 +1,4 @@
 # ternjs
 .tern-project
+
+node_modules/

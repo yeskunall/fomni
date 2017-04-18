@@ -1,0 +1,25 @@
+{
+  "name": "Neato!",
+  "version": "1.0.0",
+  "description": "Chrome extension to better manage downloaded content and to de-clutter your downloads folder.",
+  "main": "background.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/iamxypto/fomni.git"
+  },
+  "keywords": [],
+  "author": "Kunall Banerjee <yeskunall96@gmail.com> (https://kimchi.surge.sh/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/iamxypto/fomni/issues"
+  },
+  "homepage": "https://github.com/iamxypto/fomni#readme",
+  "devDependencies": {
+    "eslint": "3.19.0",
+    "eslint-config-airbnb-base": "11.1.3",
+    "eslint-plugin-import": "2.2.0"
+  }
+}
